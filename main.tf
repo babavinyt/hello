@@ -1,6 +1,6 @@
 resource "Azurerm_resoiurce_group" "rg"{
 
-    name = "vineetrg"
+    name = "vineetyadavrg"
     location = "eastus"
 
 }

@@ -1,6 +1,7 @@
 resource "Azurerm_resoiurce_group" "rg"{
+    for_each = var.rg
 
-    name = "vineetrg"
+    name = each.value.name_rg
     location = "eastus"
 
 }

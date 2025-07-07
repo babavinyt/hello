@@ -7,31 +7,34 @@ trigger:
 pool: default
 
 stages:
-- stage: stageinfrapipeline
-  displayName: vineet rg pipe line
-  jobs:
-  - job: terraforminstall 
-    displayName: infrainit job 
-    steps:
-    - task: TerraformInstaller@1
-      inputs:
-        terraformVersion: 'latest'
-        task: TerraformTask@5
-        inputs:
-          provider: 'azurerm'
-          command: 'init'
-          backendserviceArm: 'azuresc'
-          backendazurmResourceGroupName: 'vineetyadav-rg'
-          backendAzureRmKey: 'ram.terraform.tfstate'
-    -
-- task: TerraformTask@5
+  - stage: stageinfrapipeline
+    displayName: vineet infra rg
+    jobs:
+      - job: terraforminstall
+        displayName: infrainit job
+        steps:
+          - 
+- task: TerraformInstaller@1
   inputs:
-    provider: 'azurerm'
-    command: 'plan'
-    environmentServiceNameAzureRM: 'azuresc'
-   - task: TerraformTask@5
-     inputs:
-       provider: 'azurerm'
-       command: 'apply'
-       commandOptions: '-auto-approve'
-       environmentServiceNameNameAzureRm: 'azuresc'
+    terraformVersion: 'latest' 
+    
+- task: TerraformTaskV5@5
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      backendServiceArm:'azuresc'
+      backendAzureRmResourceGroupeName:'my-rg'
+      backendAzureRmStorageAccountName:'vineet271991vineet'
+      backendAzureRmContainename: 'vinni'
+      backendAzurermKey: 'ra,.terraform.tfstate'
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      environmentServiceNameAzureRM: 'Azuresc'
+  - task: TerraformTask@5
+    inputs:
+      provider: 'azurerm'
+      command: 'apply'
+      commandOptions: '-auto -approve'
+      environmentServiceAnmeAzureRM: 'Azuresc'
